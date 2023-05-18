@@ -11,7 +11,7 @@ namespace Manager
         Triangle = 2,
         Sphere = 3,
     }
-    
+
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private List<Level> levels;
@@ -22,15 +22,12 @@ namespace Manager
 
         public static LevelManager Instance { get; private set; }
         [HideInInspector] public int maxM;
-        private Dictionary<string, List<GameObject>> _pooler = new();
+        private Dictionary<string, List<GameObject>> _pooler = new Dictionary<string, List<GameObject>>();
 
         private void Awake()
         {
             Instance = this;
-            //fsadfsadfdsfsdfas
-            
-            
-            // Erdem hehehe
+
         }
 
         private void Start()
@@ -70,12 +67,12 @@ namespace Manager
         public GameObject GetFromPool(Vector3 position, ObjectsArray prefab)
         {
             var key = prefab.PoolObjectType.ToString();
-            var color = prefab.GetObjectColor();
-            
+            prefab.GetObjectColor();
+
             if (_pooler.TryGetValue(key, out var value) && value.Count > 0)
             {
                 Debug.Log($"Spawned: {key}");
-                
+
                 var obj = value.FirstOrDefault();
                 obj.transform.position = position;
                 obj.SetActive(true);
@@ -85,27 +82,26 @@ namespace Manager
             }
 
 
-            
             Debug.Log($"Instantiated: {key}");
-            
+
             var instantiatedObj = Instantiate(prefab.gameObject, position, Quaternion.identity);
             instantiatedObj.SetActive(true);
-            
+
             return instantiatedObj;
         }
 
         public void ReturnObjectToPool(GameObject obj, PoolObjectType poolObjectType)
         {
             var key = poolObjectType.ToString();
-            
+
             obj.SetActive(false);
-            
+
             if (_pooler.TryGetValue(key, out var value) && value.Contains(obj))
                 return;
-            
+
             Debug.Log($"Despawned: {key}");
 
-            
+
             obj.transform.position = Vector3.zero;
             if (value is not null)
             {
@@ -120,7 +116,7 @@ namespace Manager
 
         }
 
-        void AddStage(int thisLevel)
+        private void AddStage(int thisLevel)
         {
             ObjectSpawner(thisLevel);
             Platforms.Add(levels[thisLevel].platform1);
@@ -128,14 +124,14 @@ namespace Manager
             Platforms.Add(levels[thisLevel].platfrom3);
         }
 
-        void ObjectSpawner(int level)
+        private void ObjectSpawner(int level)
         {
             Instantiate(levels[level].platfromPrefab1, platformspawnPoint1.transform);
             Instantiate(levels[level].platfromPrefab2, platformspawnPoint2.transform);
             Instantiate(levels[level].platfromPrefab3, platformspawnPoint3.transform);
         }
 
-        void InitializeObjectPool(GameObject prefab, PoolObjectType poolObjectType)
+        private void InitializeObjectPool(GameObject prefab, PoolObjectType poolObjectType)
         {
             for (int i = 0; i < maxM; i++)
             {

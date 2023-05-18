@@ -1,7 +1,5 @@
-using System;
 using Manager;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Typeof
 {
