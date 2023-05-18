@@ -11,9 +11,9 @@ public class BallCheck : MonoBehaviour
         {
             GameObject fallenobjects = other.gameObject;
            
-            if (fallenobjects != null)
+            if (fallenobjects != null && fallenobjects.TryGetComponent<ObjectsArray>(out var objectsArray))
             {
-                StartCoroutine(WaitAndSpawn(fallenobjects));
+                StartCoroutine(WaitAndSpawn(fallenobjects, objectsArray.PoolObjectType));
                
             }
             GameManager.Instance.ballCount++;
@@ -21,12 +21,12 @@ public class BallCheck : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndSpawn(GameObject fallenobjects)
+    private IEnumerator WaitAndSpawn(GameObject fallenobjects, PoolObjectType poolObjectType)
     {
         yield return new WaitForSeconds(2f);
 
          // PoolManager.Instance.GetObjectsToPool("cubes", fallenobjects);
-        LevelManager.Instance.ReturnObjectToPool(fallenobjects);
+        LevelManager.Instance.ReturnObjectToPool(fallenobjects, poolObjectType);
 
 
     }

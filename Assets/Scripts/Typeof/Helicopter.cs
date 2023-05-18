@@ -7,7 +7,7 @@ namespace Typeof
     public class Helicopter : MonoBehaviour
     {
         private int _objectCount = 0;
-
+        
         private void FixedUpdate()
         {
             CheckDistance();
@@ -32,7 +32,7 @@ namespace Typeof
         {
 
             //LevelManager.Instance.GetObjectFromPool(LevelManager.Instance.brokenSphere, this.transform.position);
-            LevelManager.Instance.Getfrompool(transform.position,
+            LevelManager.Instance.GetFromPool(transform.position,
                                               LevelManager.Instance.brokenSphere);
             _objectCount++;
 

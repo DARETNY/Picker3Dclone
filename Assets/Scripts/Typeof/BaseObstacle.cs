@@ -1,25 +1,39 @@
+using System;
 using Manager;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Typeof
 {
     public abstract class BaseObstacle : MonoBehaviour
     {
+        [SerializeField] private bool _createObjectUponFall;
+
         private Rigidbody _rb;
         private bool IsActive;
+        private bool _fallenObjectsCreated;
 
         protected void Awake()
         {
             _rb = GetComponent<Rigidbody>();
         }
 
+        private void OnEnable()
+        {
+            _fallenObjectsCreated = false;
+        }
+        
         protected virtual void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Player"))
             {
                 //this.gameObject.SetActive(true);
-                Count(Mathf.CeilToInt(LevelManager.Instance.maxM / 8));
-                
+                if (_createObjectUponFall && !_fallenObjectsCreated)
+                {
+                    _fallenObjectsCreated = true;
+                    Count(Mathf.CeilToInt(LevelManager.Instance.maxM / 8));
+                    gameObject.SetActive(false);
+                }
             }
         }
         protected internal void ApplyGravity(bool enable)
@@ -46,6 +60,5 @@ namespace Typeof
                 _rb.angularVelocity = Vector3.zero;
             }
         }
-
     }
 }

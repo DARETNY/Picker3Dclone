@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3932753622324805144}
   - component: {fileID: 3932753622324805151}
   - component: {fileID: 3932753622324805150}
-  - component: {fileID: 3932753622324805145}
   m_Layer: 0
   m_Name: main
   m_TagString: Untagged
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3932753622324805145
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3932753622324805147}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3932753622688962685
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +94,6 @@ GameObject:
   - component: {fileID: 3932753622688962674}
   - component: {fileID: 3932753622688962678}
   - component: {fileID: 3932753622688962673}
-  - component: {fileID: 3932753622688962672}
   - component: {fileID: 3932753622688962675}
   m_Layer: 0
   m_Name: chop chop
@@ -182,22 +167,9 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3932753622688962672
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3932753622688962685}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &3932753622688962675
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -214,7 +186,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3932753623068584047
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,8 +234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ff748d30394c04f811f70bb01c9908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: {fileID: 3932753623452528289}
-  spawnedsObjects: {fileID: 0}
 --- !u!1 &3932753623452528288
 GameObject:
   m_ObjectHideFlags: 0

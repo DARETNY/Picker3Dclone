@@ -5,14 +5,20 @@ using UnityEngine;
 
 namespace Manager
 {
+    public enum PoolObjectType
+    {
+        Cube = 1,
+        Triangle = 2,
+        Sphere = 3,
+    }
+    
     public class LevelManager : MonoBehaviour
     {
         [SerializeField] private List<Level> levels;
         [SerializeField] private Transform platformspawnPoint1, platformspawnPoint2, platformspawnPoint3;
         public static List<int> Platforms = new List<int>();
 
-        private Queue<GameObject> _objectPool = new Queue<GameObject>();
-        public GameObject brokencube, brokenSphere, brokenTriangle;
+        public ObjectsArray brokencube, brokenSphere, brokenTriangle;
 
         public static LevelManager Instance { get; private set; }
         [HideInInspector] public int maxM;
@@ -39,17 +45,17 @@ namespace Manager
             {
                 if (GameManager.Instance.currentLevel % 2 == 0)
                 {
-                    InitializeObjectPool(brokenSphere.gameObject);
+                    InitializeObjectPool(brokenSphere.gameObject, PoolObjectType.Sphere);
 
                 }
                 else if (GameManager.Instance.currentLevel % 3 == 0)
                 {
-                    InitializeObjectPool(brokencube.gameObject);
+                    InitializeObjectPool(brokencube.gameObject, PoolObjectType.Cube);
 
                 }
                 else
                 {
-                    InitializeObjectPool(brokenTriangle.gameObject);
+                    InitializeObjectPool(brokenTriangle.gameObject, PoolObjectType.Triangle);
 
                 }
 
@@ -61,32 +67,45 @@ namespace Manager
 
         }
 
-        #region tester
-
-        public GameObject Getfrompool(Vector3 position, GameObject prefab)
+        public GameObject GetFromPool(Vector3 position, ObjectsArray prefab)
         {
-            var key = prefab.name;
+            var key = prefab.PoolObjectType.ToString();
+            var color = prefab.GetObjectColor();
+            
             if (_pooler.TryGetValue(key, out var value) && value.Count > 0)
             {
+                Debug.Log($"Spawned: {key}");
+                
                 var obj = value.FirstOrDefault();
                 obj.transform.position = position;
                 obj.SetActive(true);
                 value.Remove(obj);
+
                 return obj;
             }
 
 
-            return Instantiate(prefab);
-
-
+            
+            Debug.Log($"Instantiated: {key}");
+            
+            var instantiatedObj = Instantiate(prefab.gameObject, position, Quaternion.identity);
+            instantiatedObj.SetActive(true);
+            
+            return instantiatedObj;
         }
 
-        public void ReturntoPool(GameObject obj)
+        public void ReturnObjectToPool(GameObject obj, PoolObjectType poolObjectType)
         {
-            var key = obj.name;
+            var key = poolObjectType.ToString();
+            
+            obj.SetActive(false);
+            
             if (_pooler.TryGetValue(key, out var value) && value.Contains(obj))
                 return;
-            obj.SetActive(false);
+            
+            Debug.Log($"Despawned: {key}");
+
+            
             obj.transform.position = Vector3.zero;
             if (value is not null)
             {
@@ -100,9 +119,6 @@ namespace Manager
             }
 
         }
-
-        #endregion
-
 
         void AddStage(int thisLevel)
         {
@@ -119,38 +135,13 @@ namespace Manager
             Instantiate(levels[level].platfromPrefab3, platformspawnPoint3.transform);
         }
 
-        void InitializeObjectPool(GameObject prefab)
+        void InitializeObjectPool(GameObject prefab, PoolObjectType poolObjectType)
         {
             for (int i = 0; i < maxM; i++)
             {
                 GameObject obj = Instantiate(prefab, transform, true);
-                obj.SetActive(false);
-              ReturntoPool(obj);
+                ReturnObjectToPool(obj, poolObjectType);
             }
-        }
-
-        public GameObject GetObjectFromPool(GameObject obj, Vector3 position)
-        {
-            if (_objectPool.Count > 0)
-            {
-                obj = _objectPool.Dequeue();
-                obj.transform.position = position;
-                obj.SetActive(true);
-                return obj;
-            }
-
-            return null;
-        }
-
-        public void ReturnObjectToPool(GameObject obj)
-        {
-            ReturntoPool(obj);
-            return;
-            if (_objectPool.Contains(obj))
-                return;
-            obj.SetActive(false);
-            obj.transform.position = Vector3.zero;
-            _objectPool.Enqueue(obj);
         }
     }
 }

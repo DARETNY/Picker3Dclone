@@ -1,16 +1,52 @@
+using System;
+using System.Linq;
 using Manager;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class ObjectsArray : MonoBehaviour
 {
-    private Rigidbody rb;
+    [SerializeField] private PoolObjectType _poolObjectType;
+    [SerializeField] protected Color _objectColor;
+    [SerializeField] protected bool _randomColor;
+    
+    public PoolObjectType PoolObjectType => _poolObjectType;
+    
+    private MeshRenderer _meshRenderer;
+    private Rigidbody _rb;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
+        _meshRenderer = GetComponent<MeshRenderer>();
+    }
+    private void OnEnable()
+    {
+        PaintObject();
+        ResetRb();
+        _rb.constraints = RigidbodyConstraints.None;
+        _rb.isKinematic = false;
     }
 
+    private void OnDisable()
+    {
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
+        _rb.isKinematic = true;
+        ResetRb();
+    }
+
+    private void ResetRb()
+    {
+        _rb.velocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+    }
+
+    public Color GetObjectColor()
+    {
+        if (_randomColor)
+            return UnityEngine.Random.ColorHSV();
+        return _objectColor;
+    }
 
     private void FixedUpdate()
     {
@@ -19,14 +55,17 @@ public class ObjectsArray : MonoBehaviour
         gameObject.transform.position = pos;
         if (math.distance(PlayerController.Instance.GetPosition(), gameObject.transform.position.z) > 100)
         {
-            gameObject.SetActive(false);
-
+            SendToPool();
         }
-
-
     }
-    private void OnDisable()
+
+    private void PaintObject()
     {
-        LevelManager.Instance.ReturnObjectToPool(this.gameObject);
+        _meshRenderer.materials.FirstOrDefault().color = GetObjectColor();
+    }
+
+    private void SendToPool()
+    {
+        LevelManager.Instance.ReturnObjectToPool(this.gameObject, _poolObjectType);
     }
 }

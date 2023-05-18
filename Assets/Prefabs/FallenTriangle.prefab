@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &3502477782626138660
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -206,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &3625212870440888897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -309,6 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &4374668059064860349
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -412,6 +415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &4559516582621894797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -515,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &7281596205188431709
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -618,6 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &7708525828820942424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -785,6 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &8119893750155478832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -888,6 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1
 --- !u!1001 &9040197394517786748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -991,3 +999,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6735d36bb3946428259063e511b0ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _createObjectUponFall: 1

@@ -15,6 +15,6 @@ MonoBehaviour:
   platform1: 20
   platfrom2: 32
   platfrom3: 19
-  platfromPrefab1: {fileID: 880057011453715061, guid: d3e71da64dd787d40a78f0766d09ecdf, type: 3}
+  platfromPrefab1: {fileID: 3932753623068584047, guid: 7374d3c43e99ecf46b1010d6e9cbc05f, type: 3}
   platfromPrefab2: {fileID: 3932753623068584047, guid: 7374d3c43e99ecf46b1010d6e9cbc05f, type: 3}
   platfromPrefab3: {fileID: 7366559370454663945, guid: 3b6c0d0caf3d91845ad8b2ab566c33a0, type: 3}
