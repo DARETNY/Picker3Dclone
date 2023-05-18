@@ -21,6 +21,7 @@ namespace Manager
         private void Awake()
         {
             Instance = this;
+            //fsadfsadfdsfsdfas
 
         }
 
