@@ -22,7 +22,9 @@ namespace Manager
         {
             Instance = this;
             //fsadfsadfdsfsdfas
-
+            
+            
+            // Erdem hehehe
         }
 
         private void Start()
