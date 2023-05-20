@@ -1,5 +1,4 @@
 using Manager;
-using UnityEngine;
 
 namespace Typeof
 {
@@ -7,9 +6,8 @@ namespace Typeof
     {
 
 
-        protected override void Count(int added)
+        override protected void Count(int added)
         {
-            Debug.Log(added);
             for (int i = 0; i < added; i++)
             {
                 //LevelManager.Instance.GetObjectFromPool(LevelManager.Instance.brokencube, this.transform.position);

@@ -1,3 +1,4 @@
+using System;
 using Manager;
 using UnityEngine;
 
@@ -5,12 +6,12 @@ namespace Typeof
 {
     public abstract class BaseObstacle : MonoBehaviour
     {
-        [SerializeField] private bool _createObjectUponFall;
+        [SerializeField] private bool createObjectUponFall;
 
         private Rigidbody _rb;
         private bool IsActive;
         private bool _fallenObjectsCreated;
-
+        public static event EventHandler OnAnyObjectTaken;
         protected void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -26,8 +27,9 @@ namespace Typeof
             if (other.gameObject.CompareTag("Player"))
             {
                 //this.gameObject.SetActive(true);
-                if (_createObjectUponFall && !_fallenObjectsCreated)
+                if (createObjectUponFall && !_fallenObjectsCreated)
                 {
+                    OnAnyObjectTaken?.Invoke(this,EventArgs.Empty);
                     _fallenObjectsCreated = true;
                     Count(Mathf.CeilToInt(LevelManager.Instance.maxM / 8));
                     gameObject.SetActive(false);

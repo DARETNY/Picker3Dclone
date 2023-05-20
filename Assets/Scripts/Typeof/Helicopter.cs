@@ -1,3 +1,4 @@
+using System;
 using Manager;
 using Unity.Mathematics;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace Typeof
     public class Helicopter : MonoBehaviour
     {
         private int _objectCount = 0;
-        
+        public static event EventHandler OnObjectsSpawn;
         private void FixedUpdate()
         {
             CheckDistance();
@@ -45,7 +46,7 @@ namespace Typeof
             xPosition = Mathf.Lerp(-12, 12, (xPosition + 12) / (12 * 2));
             Vector3 newPosition = new Vector3(xPosition, transform.position.y, transform.position.z + 1f);
             transform.position = newPosition;
-
+            OnObjectsSpawn?.Invoke(this,EventArgs.Empty);
         }
     }
 }

@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &6577754475126166990
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &4650901324522590299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &1342767653813670339
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &3659378889875027909
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &5539631498795343591
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -790,7 +790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &8079473899252877162
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &7318286696157252872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc3a56c50fd8974c80524770ace0504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _createObjectUponFall: 1
+  createObjectUponFall: 1
 --- !u!54 &7724610724162360084
 Rigidbody:
   m_ObjectHideFlags: 0

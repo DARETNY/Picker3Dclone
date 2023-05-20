@@ -22,7 +22,7 @@ namespace Manager
 
         public static LevelManager Instance { get; private set; }
         [HideInInspector] public int maxM;
-        private Dictionary<string, List<GameObject>> _pooler = new Dictionary<string, List<GameObject>>();
+        private Dictionary<string, List<GameObject>> _pooler = new();
 
         private void Awake()
         {
@@ -71,7 +71,7 @@ namespace Manager
 
             if (_pooler.TryGetValue(key, out var value) && value.Count > 0)
             {
-                Debug.Log($"Spawned: {key}");
+
 
                 var obj = value.FirstOrDefault();
                 obj.transform.position = position;
@@ -82,8 +82,6 @@ namespace Manager
             }
 
 
-            Debug.Log($"Instantiated: {key}");
-
             var instantiatedObj = Instantiate(prefab.gameObject, position, Quaternion.identity);
             instantiatedObj.SetActive(true);
 
@@ -93,15 +91,12 @@ namespace Manager
         public void ReturnObjectToPool(GameObject obj, PoolObjectType poolObjectType)
         {
             var key = poolObjectType.ToString();
-
             obj.SetActive(false);
+
 
             if (_pooler.TryGetValue(key, out var value) && value.Contains(obj))
                 return;
-
-            Debug.Log($"Despawned: {key}");
-
-
+            
             obj.transform.position = Vector3.zero;
             if (value is not null)
             {

@@ -44,7 +44,8 @@ public class ObjectsArray : MonoBehaviour
     {
         if (_randomColor)
             return UnityEngine.Random.ColorHSV();
-        return _objectColor;
+        else
+            return _objectColor;
     }
 
     private void FixedUpdate()

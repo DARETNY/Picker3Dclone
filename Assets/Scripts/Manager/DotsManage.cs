@@ -24,9 +24,11 @@ namespace Manager
         }
 
 
-        public void UILeftRİghtEffect(Transform transform)
+        public void UILeftRİghtEffect(Transform mover)
         {
-            transform.DOLocalMove(transform.localPosition + new Vector3(0, 500, 0), 1)
+           
+      
+            mover.DOLocalMove(new Vector3(500,0,0), 1)
                     .SetLoops(-1, LoopType.Yoyo) // Yoyo döngüsü ile hareketi sürekli yap
                     .SetEase(Ease.InOutSine);
         }
