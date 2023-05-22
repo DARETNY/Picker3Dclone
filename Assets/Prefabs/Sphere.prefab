@@ -112,8 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolObjectType: 3
-  _objectColor: {r: 1, g: 1, b: 1, a: 1}
-  _randomColor: 1
+  objectColor: {r: 0, g: 0, b: 0, a: 0}
+  randomColor: 1
 --- !u!54 &5088404800878150281
 Rigidbody:
   m_ObjectHideFlags: 0

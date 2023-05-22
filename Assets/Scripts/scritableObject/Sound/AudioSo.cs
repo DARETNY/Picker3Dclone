@@ -7,6 +7,11 @@ namespace scritableObject
     {
         public AudioClip[] getObjects;
         public AudioClip[] onHelicopterSpawn;
+        public AudioClip[] onObjectsFall;
+        public AudioClip[] onstagepass;
+        public AudioClip[] onstagefail;
+        public AudioClip[] onnextlevel;
+        
 
     }
 }

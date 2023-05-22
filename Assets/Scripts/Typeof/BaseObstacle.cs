@@ -9,7 +9,7 @@ namespace Typeof
         [SerializeField] private bool createObjectUponFall;
 
         private Rigidbody _rb;
-        private bool IsActive;
+        private bool _ısActive;
         private bool _fallenObjectsCreated;
         public static event EventHandler OnAnyObjectTaken;
         protected void Awake()
@@ -26,7 +26,6 @@ namespace Typeof
         {
             if (other.gameObject.CompareTag("Player"))
             {
-                //this.gameObject.SetActive(true);
                 if (createObjectUponFall && !_fallenObjectsCreated)
                 {
                     OnAnyObjectTaken?.Invoke(this,EventArgs.Empty);
@@ -43,22 +42,15 @@ namespace Typeof
         }
         public bool SetActive(bool isActive)
         {
-            IsActive = isActive;
+            _ısActive = isActive;
             gameObject.SetActive(isActive);
 
-            return IsActive;
+            return _ısActive;
         }
 
         protected abstract void Count(int added);
 
 
-        protected void ResetRigidbody()
-        {
-            if (_rb is not null)
-            {
-                _rb.velocity = Vector3.zero;
-                _rb.angularVelocity = Vector3.zero;
-            }
-        }
+        
     }
 }

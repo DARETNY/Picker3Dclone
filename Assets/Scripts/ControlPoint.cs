@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using DG.Tweening;
 using Manager;
@@ -12,6 +13,9 @@ public class ControlPoint : MonoBehaviour
     private float _waittimer;
     [SerializeField] private float waitterTİmer;
     [SerializeField] private Image stage;
+
+
+    public event EventHandler OnLevelfaild;
 
     public static ControlPoint Instance { get; private set; }
     private void Awake()
@@ -42,6 +46,7 @@ public class ControlPoint : MonoBehaviour
             {
                 rb.AddForce(Vector3.forward * _forceAdd);
 
+
             }
             else
             {
@@ -71,12 +76,13 @@ public class ControlPoint : MonoBehaviour
 
         {
 
+
             stage.color = Color.green;
             gameManager.ballCount = 0;
             gameManager.dotsManage.PlatformMove();
             PlayerController.Instance.gameObject.transform.DOBlendableScaleBy(new Vector3(.3f, 0, 0), 2);
             gameManager.currentPlatform++;
-         
+
             gameManager.gamestate = GameManager.GameState.Start;
 
 
@@ -84,19 +90,26 @@ public class ControlPoint : MonoBehaviour
         else if (gameManager.ballCount >= LevelManager.Platforms[gameManager.currentPlatform] &&
                  gameManager.currentPlatform + 1 >= LevelManager.Platforms.Count)
         {
+
+
             stage.color = Color.green;
             gameManager.dotsManage.PlatformMove();
             gameManager.currentLevel++;
             gameManager.saveManager.level = gameManager.currentLevel;
-           
+
             gameManager.saveManager.Save();
+
             gameManager.gamestate = GameManager.GameState.Nextlevel;
 
         }
         else
         {
+
+
             stage.color = Color.red;
             gameManager.gamestate = GameManager.GameState.End;
+            OnLevelfaild?.Invoke(this, EventArgs.Empty);
+            Debug.Log(OnLevelfaild);
 
         }
 

@@ -6,14 +6,14 @@ using UnityEngine;
 public class ObjectsArray : MonoBehaviour
 {
     [SerializeField] private PoolObjectType _poolObjectType;
-    [SerializeField] protected Color _objectColor;
-    [SerializeField] protected bool _randomColor;
+    [SerializeField] protected Color objectColor;
+    [SerializeField] protected bool randomColor;
     
     public PoolObjectType PoolObjectType => _poolObjectType;
     
     private MeshRenderer _meshRenderer;
     private Rigidbody _rb;
-
+   
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -42,10 +42,10 @@ public class ObjectsArray : MonoBehaviour
 
     public Color GetObjectColor()
     {
-        if (_randomColor)
+        if (randomColor)
             return UnityEngine.Random.ColorHSV();
         else
-            return _objectColor;
+            return objectColor;
     }
 
     private void FixedUpdate()
@@ -57,6 +57,7 @@ public class ObjectsArray : MonoBehaviour
         {
             SendToPool();
         }
+       
     }
 
     private void PaintObject()

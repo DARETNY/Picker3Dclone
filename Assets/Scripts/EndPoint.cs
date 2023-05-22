@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Cinemachine;
 using Manager;
@@ -10,7 +11,7 @@ public class EndPoint : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private GameObject endpoint;
     [SerializeField] private Button Button;
-
+    public static event EventHandler Onnextlevel;
     private void Start()
     {
         endpoint.SetActive(false);
@@ -23,6 +24,8 @@ public class EndPoint : MonoBehaviour
     private void StopFollowing()
     {
         virtualCamera.Follow = null;
+        virtualCamera.LookAt = null;
+        Onnextlevel?.Invoke(this,EventArgs.Empty);
     }
 
     private void OnTriggerEnter(Collider other)

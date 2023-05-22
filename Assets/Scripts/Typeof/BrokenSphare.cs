@@ -7,7 +7,7 @@ namespace Typeof
        
 
        
-       protected override void Count(int added)
+       override protected void Count(int added)
         {
             for (int i = 0; i < added; i++)
             {
