@@ -13,7 +13,8 @@ public class ControlPoint : MonoBehaviour
     private float _waittimer;
     [SerializeField] private float waitterTİmer;
     [SerializeField] private Image stage;
-
+    [SerializeField] private GameObject particalonstagepass;
+    
 
     public event EventHandler OnLevelfaild;
 
@@ -80,9 +81,9 @@ public class ControlPoint : MonoBehaviour
             stage.color = Color.green;
             gameManager.ballCount = 0;
             gameManager.dotsManage.PlatformMove();
-            PlayerController.Instance.gameObject.transform.DOBlendableScaleBy(new Vector3(.3f, 0, 0), 2);
+            PlayerController.Instance.gameObject.transform.DOBlendableScaleBy(new Vector3(.2f, 0, 0), 2);
             gameManager.currentPlatform++;
-
+            
             gameManager.gamestate = GameManager.GameState.Start;
 
 
@@ -109,11 +110,11 @@ public class ControlPoint : MonoBehaviour
             stage.color = Color.red;
             gameManager.gamestate = GameManager.GameState.End;
             OnLevelfaild?.Invoke(this, EventArgs.Empty);
-            Debug.Log(OnLevelfaild);
 
         }
 
     }
-
+   
+   
 
 }

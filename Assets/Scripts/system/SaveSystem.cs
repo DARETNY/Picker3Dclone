@@ -4,61 +4,64 @@ using System.Runtime.Serialization.Formatters.Binary;
 using Manager;
 using UnityEngine;
 
-public class SaveSystem : MonoBehaviour
+namespace system
 {
-
-    public int level = 0;
-    public int score=0;
-   
-
-    private void Awake()
+    public class SaveSystem : MonoBehaviour
     {
-        Load();
-    }
 
-    private void Start()
-    {
-        GameManager.Instance.currentLevel = level;
-        GameManager.Instance.saveManager = this;
-        GameManager.Instance.money = score;
-    }
+        public int level = 0;
+        public int score = 0;
 
 
-    void Load()
-    {
-        if (File.Exists(Application.persistentDataPath + "/playerInfo.data"))
+        private void Awake()
+        {
+            Load();
+        }
+
+        private void Start()
+        {
+            GameManager.Instance.currentLevel = level;
+            GameManager.Instance.saveManager = this;
+            GameManager.Instance.money = score;
+        }
+
+
+        private void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/playerInfo.data"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.Open);
+                PlayerData data = (PlayerData)bf.Deserialize(file);
+                level = data.Level;
+                score = data.score;
+
+
+                file.Close();
+
+            }
+        }
+
+        public void Save()
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.data", FileMode.Open);
-            PlayerData data = (PlayerData)bf.Deserialize(file);
-            level = data.Level;
-            score = data.score;
-          
-
+            FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.data");
+            PlayerData data = new PlayerData();
+            data.Level = level;
+            data.score = score;
+            bf.Serialize(file, data);
             file.Close();
-
         }
+
+
     }
 
-    public void Save()
+    [Serializable]
+    internal class PlayerData
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/playerInfo.data");
-        PlayerData data = new PlayerData();
-        data.Level = level;
-        data.score = score;
-        bf.Serialize(file, data);
-        file.Close();
+        public int Level;
+        public int score;
+
+
     }
-
-
-}
-
-[Serializable]
-class PlayerData
-{
-    public int Level;
-    public int score;
-    
-
 }

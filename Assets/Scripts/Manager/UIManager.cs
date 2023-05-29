@@ -10,33 +10,39 @@ namespace Manager
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private GameObject dragtostart, gameFaildUI, backGround, sizeUptext, skıns, shopPanel;
+        [SerializeField] private GameObject dragtostart, gameFaildUI, sizeUptext, skıns;
+        [SerializeField] private GameObject shop;
         [SerializeField] private Button startButton;
         [SerializeField] private Button retryButton;
         private bool _isToggle;
 
         [SerializeField] private TextMeshPro[] boardText;
-        [SerializeField] private TextMeshProUGUI currentlevel, NextLevel;
+        [SerializeField] private TextMeshProUGUI currentlevel;
+        [SerializeField] private TextMeshProUGUI nextLevel;
+       
 
+        
 
         private void Start()
         {
-          
+           
+
+           
             _isToggle = false;
             sizeUptext.SetActive(false);
-            shopPanel.SetActive(false);
+            shop.SetActive(false);
             if (GameManager.Instance.gamestate == GameManager.GameState.Empty)
             {
-              
+
                 skıns.SetActive(true);
                 dragtostart.SetActive(true);
-                GameManager.Instance.dotsManage.UILeftRİghtEffect(dragtostart.transform);
+                // GameManager.Instance.dotsManage.UILeftRİghtEffect(dragtostart.transform);
 
                 gameFaildUI.gameObject.SetActive(false);
                 PlayerController.Instance.OnsizeUpTextOnStop += SizeUpTextOnStop;
                 PlayerController.Instance.OnsizeUpTextOnMove += InstanceOnOnsizeUpTextOnMove;
             }
-           
+
 
         }
         private void OnDestroy()
@@ -53,14 +59,15 @@ namespace Manager
         {
 
             //todo:auido clip ve vfx eklenecek
-           this. sizeUptext.SetActive(true);
+            this.sizeUptext.SetActive(true);
             sizeUptext.transform.DOBlendableScaleBy(new Vector3(.01f, .01f, .01f), 2);
 
         }
-      
+
 
         public void Play()
         {
+            shop.SetActive(false);
             skıns.SetActive(false);
             startButton.gameObject.SetActive(false);
             dragtostart.gameObject.SetActive(false);
@@ -104,14 +111,15 @@ namespace Manager
         {
             if (_isToggle)
             {
-                shopPanel.SetActive(false);
+                shop.SetActive(false);
                 _isToggle = false;
             }
             else
             {
-                shopPanel.SetActive(true);
+                shop.SetActive(true);
                 _isToggle = true;
             }
+
         }
         private void PlatformsTextUI()
         {
@@ -123,12 +131,10 @@ namespace Manager
         private void CurrentLevelIndex()
         {
             currentlevel.text = (GameManager.Instance.currentLevel + 1).ToString();
-            NextLevel.text = (GameManager.Instance.currentLevel + 2).ToString();
+            nextLevel.text = (GameManager.Instance.currentLevel + 2).ToString();
 
         }
 
-
-       
 
     }
 }

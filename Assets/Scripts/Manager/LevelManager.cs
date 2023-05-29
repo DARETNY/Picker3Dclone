@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Market;
 using scritableObject;
 using UnityEngine;
 
@@ -71,8 +72,8 @@ namespace Manager
 
             if (_pooler.TryGetValue(key, out var value) && value.Count > 0)
             {
-
-
+                
+                
                 var obj = value.FirstOrDefault();
                 obj.transform.position = position;
                 obj.SetActive(true);
@@ -83,6 +84,7 @@ namespace Manager
 
 
             var instantiatedObj = Instantiate(prefab.gameObject, position, Quaternion.identity);
+            
             instantiatedObj.SetActive(true);
 
             return instantiatedObj;

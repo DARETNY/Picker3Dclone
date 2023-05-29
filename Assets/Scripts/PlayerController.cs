@@ -62,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerRb.velocity = Vector3.zero;
         PlayerRb.angularVelocity = Vector3.zero;
+       
         _ismoving = false;
     }
     private void Movment()
