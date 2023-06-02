@@ -19,15 +19,13 @@ namespace Manager
         [SerializeField] private TextMeshPro[] boardText;
         [SerializeField] private TextMeshProUGUI currentlevel;
         [SerializeField] private TextMeshProUGUI nextLevel;
-       
+        [SerializeField] private TextMeshProUGUI balance;
 
-        
 
         private void Start()
         {
-           
+            UpdateScoreUI();
 
-           
             _isToggle = false;
             sizeUptext.SetActive(false);
             shop.SetActive(false);
@@ -133,6 +131,22 @@ namespace Manager
             currentlevel.text = (GameManager.Instance.currentLevel + 1).ToString();
             nextLevel.text = (GameManager.Instance.currentLevel + 2).ToString();
 
+        }
+
+
+        public int UpdateScoreUI()
+        {
+            balance.text = GameManager.Instance.saveManager.score.ToString();
+
+            return 1;
+        }
+
+        public void UpdateMoney(int increment)
+        {
+            int money = GameManager.Instance.saveManager.score;
+            money = money + increment;
+            GameManager.Instance.saveManager.score = money;
+            UpdateScoreUI();
         }
 
 

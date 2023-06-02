@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
 
     private float _speed;
     private bool _ismoving = true;
+    private Color _color;
 
     private RegionController _regionController;
     public static PlayerController Instance { get; private set; }
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         Instance = this;
         _regionController = FindObjectOfType<RegionController>();
         _speed = _magnetType.speed;
+        _color = _magnetType.Color;
 
 
     }

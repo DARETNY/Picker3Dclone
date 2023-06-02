@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Manager;
+using Market.items;
 using UnityEngine;
 
 namespace system
@@ -11,11 +12,13 @@ namespace system
 
         public int level = 0;
         public int score = 0;
-
+        public İtemsSo[] items;
 
         private void Awake()
         {
             Load();
+            
+
         }
 
         private void Start()
@@ -35,12 +38,22 @@ namespace system
                 PlayerData data = (PlayerData)bf.Deserialize(file);
                 level = data.Level;
                 score = data.score;
+                items = data.items;
 
-
+                if (data.items!=null)
+                {
+                   
+                    foreach (var item in items)
+                    {
+                        item.isPurchaed = true;
+                    } 
+                    MarketSystem.spawnedObject.SetActive(true);
+                }
                 file.Close();
 
             }
         }
+       
 
         public void Save()
         {
@@ -49,6 +62,7 @@ namespace system
             PlayerData data = new PlayerData();
             data.Level = level;
             data.score = score;
+            data.items = items;
             bf.Serialize(file, data);
             file.Close();
         }
@@ -61,6 +75,7 @@ namespace system
     {
         public int Level;
         public int score;
+        public İtemsSo[] items;
 
 
     }

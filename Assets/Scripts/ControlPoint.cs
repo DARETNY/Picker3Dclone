@@ -9,12 +9,12 @@ public class ControlPoint : MonoBehaviour
 {
     // eventhandler kullanılarak stagelerin durumu kontrol edilebilir
 
-    private float _forceAdd = 50;
+    [SerializeField] private float _forceAdd = 50;
     private float _waittimer;
     [SerializeField] private float waitterTİmer;
     [SerializeField] private Image stage;
     [SerializeField] private GameObject particalonstagepass;
-    
+
 
     public event EventHandler OnLevelfaild;
 
@@ -83,7 +83,7 @@ public class ControlPoint : MonoBehaviour
             gameManager.dotsManage.PlatformMove();
             PlayerController.Instance.gameObject.transform.DOBlendableScaleBy(new Vector3(.2f, 0, 0), 2);
             gameManager.currentPlatform++;
-            
+
             gameManager.gamestate = GameManager.GameState.Start;
 
 
@@ -114,7 +114,6 @@ public class ControlPoint : MonoBehaviour
         }
 
     }
-   
-   
+
 
 }

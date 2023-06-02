@@ -7,5 +7,6 @@ namespace scritableObject
     {
         public float speed;
         //todo:renk gibi diger unsurlar eklemee yapılcak
+        public Color Color;
     }
 }

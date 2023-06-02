@@ -62,7 +62,7 @@ namespace Manager
 
                 pos.DOLocalRotate(Vector3.zero, 1);
 
-                pos.DOAnchorPos(moneyTomoney.anchoredPosition3D, 2);
+                pos.DOAnchorPos(moneyTomoney.anchoredPosition, 2);
             }
         }
 
