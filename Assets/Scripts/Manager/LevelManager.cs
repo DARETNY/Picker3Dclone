@@ -17,6 +17,7 @@ namespace Manager
         [SerializeField] private List<Level> levels;
         [SerializeField] private Transform platformspawnPoint1, platformspawnPoint2, platformspawnPoint3;
         public static List<int> Platforms = new List<int>();
+        [SerializeField] private Renderer[] planes;
 
         public ObjectsArray brokencube, brokenSphere, brokenTriangle;
 
@@ -38,24 +39,33 @@ namespace Manager
             AddStage(GameManager.Instance.currentLevel % levels.Count);
             maxM = Platforms.Max();
 
-            if (GameManager.Instance.gamestate == GameManager.GameState.Empty)
+
+            foreach (Renderer matcolor in planes)
             {
-                if (GameManager.Instance.currentLevel % 2 == 0)
+
+
+                if (GameManager.Instance.gamestate == GameManager.GameState.Empty)
                 {
-                    InitializeObjectPool(brokenSphere.gameObject, PoolObjectType.Sphere);
+                    if (GameManager.Instance.currentLevel % 5 == 0)
+                    {
+                        InitializeObjectPool(brokenSphere.gameObject, PoolObjectType.Sphere);
+                        matcolor!.material.color = Color.green;
+
+
+                    }
+                    if (GameManager.Instance.currentLevel % 3 == 0)
+                    {
+                        InitializeObjectPool(brokencube.gameObject, PoolObjectType.Cube);
+                        matcolor!.material.color = Color.red;
+                    }
+                    else
+                    {
+                        InitializeObjectPool(brokenTriangle.gameObject, PoolObjectType.Triangle);
+                        matcolor!.material.color = Color.blue;
+                    }
+
 
                 }
-                else if (GameManager.Instance.currentLevel % 3 == 0)
-                {
-                    InitializeObjectPool(brokencube.gameObject, PoolObjectType.Cube);
-
-                }
-                else
-                {
-                    InitializeObjectPool(brokenTriangle.gameObject, PoolObjectType.Triangle);
-
-                }
-
 
             }
 
@@ -71,19 +81,18 @@ namespace Manager
 
             if (_pooler.TryGetValue(key, out var value) && value.Count > 0)
             {
-                
-                
+
+
                 var obj = value.FirstOrDefault();
                 obj.transform.position = position;
                 obj.SetActive(true);
                 value.Remove(obj);
-
                 return obj;
             }
 
 
             var instantiatedObj = Instantiate(prefab.gameObject, position, Quaternion.identity);
-            
+
             instantiatedObj.SetActive(true);
 
             return instantiatedObj;
@@ -97,7 +106,7 @@ namespace Manager
 
             if (_pooler.TryGetValue(key, out var value) && value.Contains(obj))
                 return;
-            
+
             obj.transform.position = Vector3.zero;
             if (value is not null)
             {

@@ -14,7 +14,8 @@ public class ControlPoint : MonoBehaviour
     [SerializeField] private float waitterTİmer;
     [SerializeField] private Image stage;
     [SerializeField] private GameObject particalonstagepass;
-
+    public Image nitro;
+    
 
     public event EventHandler OnLevelfaild;
 
@@ -36,6 +37,10 @@ public class ControlPoint : MonoBehaviour
 
         }
 
+    }
+    private void NitroLoad()
+    {
+        nitro.fillAmount += 1/3f;
     }
 
     private void OnTriggerStay(Collider other)
@@ -77,7 +82,7 @@ public class ControlPoint : MonoBehaviour
 
         {
 
-
+            NitroLoad();
             stage.color = Color.green;
             gameManager.ballCount = 0;
             gameManager.dotsManage.PlatformMove();
@@ -92,7 +97,7 @@ public class ControlPoint : MonoBehaviour
                  gameManager.currentPlatform + 1 >= LevelManager.Platforms.Count)
         {
 
-
+            NitroLoad();
             stage.color = Color.green;
             gameManager.dotsManage.PlatformMove();
             gameManager.currentLevel++;

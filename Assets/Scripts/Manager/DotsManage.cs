@@ -11,6 +11,7 @@ namespace Manager
         [SerializeField] private Transform[] baricades = new Transform[2];
         [SerializeField] private RectTransform moneyTomoney;
         
+        
 
         public event EventHandler Onstagepass;
         private void Start()
@@ -53,7 +54,9 @@ namespace Manager
         public void Shaker(GameObject shakerGameObject)
         {
             shakerGameObject.transform.DOShakeScale(2, Vector3.one, 3);
+            
         }
+       
         public void MoneyMover(GameObject moverGameObject)
         {
             for (int i = 0; i < moverGameObject.transform.childCount; i++)
@@ -66,6 +69,12 @@ namespace Manager
             }
         }
 
+
+        public void Fader(CanvasGroup obj)
+        {
+            obj.DOFade(1, 3);
+        } 
+       
         #endregion
 
     }

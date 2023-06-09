@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class BallCheck : MonoBehaviour
 {
-    public static event EventHandler Onobjectsfall; 
+    public static event EventHandler Onobjectsfall;
+    [SerializeField] private ParticleSystem particaleffect;
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("CubePeaces"))
@@ -13,15 +15,15 @@ public class BallCheck : MonoBehaviour
             GameObject fallenobjects = other.gameObject;
             
             Onobjectsfall?.Invoke(this,EventArgs.Empty);
-            
-           
+
+            particaleffect.Play();
             if (fallenobjects != null && fallenobjects.TryGetComponent<ObjectsArray>(out var objectsArray))
             {
                 StartCoroutine(WaitAndSpawn(fallenobjects, objectsArray.PoolObjectType));
                
             }
             GameManager.Instance.ballCount++;
-            //todo:test amaclı olarak yapıldı daha sonra ayarlanıcak
+           
         }
     }
 

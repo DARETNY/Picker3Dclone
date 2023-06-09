@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Cinemachine;
 using Manager;
+using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,7 +15,10 @@ public class EndPoint : MonoBehaviour
     [SerializeField] private Button collectMoneyButton;
     [SerializeField] private GameObject partical;
     [SerializeField] private GameObject coins;
-    
+    [SerializeField] private PointControl _pointControl;
+    [SerializeField] private TextMeshProUGUI lastBalance;
+
+
     private bool _isclicked = false;
     public static event EventHandler Onnextlevel;
     private void Start()
@@ -23,6 +27,7 @@ public class EndPoint : MonoBehaviour
         coins.SetActive(false);
         virtualCamera.Follow = targetObject;
         virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+
 
     }
 
@@ -38,8 +43,18 @@ public class EndPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+
         if (other.CompareTag("Player"))
         {
+            var x = coins.transform.GetComponentsInChildren<CanvasGroup>();
+            lastBalance.text = _pointControl.moneyOnstage().ToString();
+
+            foreach (CanvasGroup item in x)
+            {
+                GameManager.Instance.dotsManage.Fader(item);
+            }
+
 
             StopFollowing();
 
@@ -60,14 +75,16 @@ public class EndPoint : MonoBehaviour
 
 
             });
-           
+
 
         }
+
     }
+
     private void AddMoneyToBank()
     {
 
-        GameManager.Instance.money += 50;
+        GameManager.Instance.money += _pointControl.moneyOnstage();
         GameManager.Instance.saveManager.score = GameManager.Instance.money;
         GameManager.Instance.saveManager.Save();
     }
@@ -83,7 +100,7 @@ public class EndPoint : MonoBehaviour
     {
         var x = Instantiate(partical, transform, true);
         x.transform.position += Camera.main.transform.position + Camera.main.transform.forward * 20;
-    
+
     }
     private void Clicked()
     {
@@ -93,5 +110,5 @@ public class EndPoint : MonoBehaviour
         }
     }
 
-    
+
 }

@@ -1,5 +1,4 @@
 using Manager;
-using scritableObject;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,17 +14,18 @@ namespace Market.items
         [SerializeField] private Button unequiqButton;
         [SerializeField] private Transform pos;
 
-        [HideInInspector] public static GameObject spawnedObject;
+        public static GameObject spawnedObject;
         [SerializeField] private UIManager _uıManager;
         private int value;
         [SerializeField] private TextMeshProUGUI pricetext;
         [SerializeField] private Image _ımage;
-        
+
 
         private void Start()
         {
             _ımage.sprite = _items.Image;
            
+
 
             LoadItem();
         }
@@ -37,16 +37,14 @@ namespace Market.items
             {
                 equiqButton.gameObject.SetActive(true);
                 unequiqButton.gameObject.SetActive(false);
-                
+
                 pricetext.text = _items.name;
-               
-                
 
 
             }
             else
             {
-                pricetext.text =  _items.price.ToString();
+                pricetext.text = _items.price.ToString();
                 buybuButton.gameObject.SetActive(true);
                 equiqButton.gameObject.SetActive(false);
                 unequiqButton.gameObject.SetActive(false);
@@ -56,9 +54,9 @@ namespace Market.items
 
         public void BuyItem()
         {
-            if (!_items.isPurchaed && _items.price <= _uıManager.UpdateScoreUI())
+            if (!_items.isPurchaed && _items.price <= GameManager.Instance.saveManager.score)
             {
-               
+              
 
                 _items.isPurchaed = true;
                 _uıManager.UpdateMoney(-_items.price);

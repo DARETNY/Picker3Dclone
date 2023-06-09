@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: magneto
   m_EditorClassIdentifier: 
   speed: 20
+  Color: {r: 0, g: 0.9528302, b: 0.026373582, a: 0}

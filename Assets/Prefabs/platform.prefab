@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6577253f12221e740aeb8a2057c8e712, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particaleffect: {fileID: 198330214428362902, guid: a97415c6b57076f41a6621a7b51d63a3, type: 3}
 --- !u!1 &399348193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,5 +1194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c20feaa94d301d04aaa63dd9f1408a76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _forceAdd: 50
   "waitterT\u0130mer": 2
   stage: {fileID: 0}
+  particalonstagepass: {fileID: 0}
+  nitro: {fileID: 0}

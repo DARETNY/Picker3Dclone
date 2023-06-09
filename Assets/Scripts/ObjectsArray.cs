@@ -8,8 +8,9 @@ public class ObjectsArray : MonoBehaviour
     [SerializeField] private PoolObjectType _poolObjectType;
     [SerializeField] protected Color objectColor;
     [SerializeField] protected bool randomColor;
-    
+  
     public PoolObjectType PoolObjectType => _poolObjectType;
+    
     
     private MeshRenderer _meshRenderer;
     private Rigidbody _rb;

@@ -14,13 +14,14 @@ namespace Manager
 
         [SerializeField] private AudioSo audioClipRef;
         [Range(0, 5)] [SerializeField] private float volume = 5;
+        [Tooltip("{0},{1} if this thick on sounds will come from the camera other wise come from the points")]
         [SerializeField] private bool enable3dsound ;
         private  Vector3 _desiredpos;
         
         
         private void OnEnable()
         {
-            // hangi objelerden ses alıcaz eventhandler düzenle
+           
             BaseObstacle.OnAnyObjectTaken += BaseObstacleOnOnAnyObjectTaken;
             Helicopter.OnObjectsSpawn += HelicopterOnOnObjectsSpawn;
             BallCheck.Onobjectsfall += BallCheckOnOnobjectsfall;
@@ -70,6 +71,7 @@ namespace Manager
         {
             BallCheck ballCheck = sender as BallCheck;
             PlaySound(audioClipRef.onObjectsFall, ballCheck.transform.position);
+            // partical efect ekle
         }
       
         private void InstanceOnOnLevelfaild(object sender, EventArgs e)

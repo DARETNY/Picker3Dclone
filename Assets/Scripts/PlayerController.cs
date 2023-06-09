@@ -1,14 +1,16 @@
 using System;
+using DG.Tweening;
 using Manager;
 using scritableObject;
 using Typeof;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 
-    [SerializeField] private MagnetType _magnetType;
+    public MagnetType _magnetType;
     [SerializeField] private Rigidbody PlayerRb;
     public event EventHandler OnsizeUpTextOnStop;
     public event EventHandler OnsizeUpTextOnMove;
@@ -21,6 +23,8 @@ public class PlayerController : MonoBehaviour
     public static PlayerController Instance { get; private set; }
     [Range(0, 100)] [SerializeField] private int deticatedDistance = 20;
     private BaseObstacle[] _baseObstacles;
+    [SerializeField] private Image nitroİcon;
+    private float _currentNitro;
 
     private void Awake()
     {
@@ -28,13 +32,15 @@ public class PlayerController : MonoBehaviour
         Instance = this;
         _regionController = FindObjectOfType<RegionController>();
         _speed = _magnetType.speed;
-        _color = _magnetType.Color;
+        _color = _magnetType.color;
 
 
     }
 
+
     private void FixedUpdate()
     {
+        Nitro();
 
         if (GameManager.Instance.gamestate == GameManager.GameState.Start ||
             GameManager.Instance.gamestate == GameManager.GameState.Nextlevel)
@@ -54,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
         }
         CheckDistance();
-       
+
 
     }
 
@@ -64,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
         PlayerRb.velocity = Vector3.zero;
         PlayerRb.angularVelocity = Vector3.zero;
-       
+
         _ismoving = false;
     }
     private void Movment()
@@ -88,11 +94,25 @@ public class PlayerController : MonoBehaviour
 
         return gameObject.transform.position.z;
     }
+    void Nitro()
+    {
 
+
+        if (nitroİcon.fillAmount > 0.9f)
+        {
+            nitroİcon.DOFillAmount(0, 5);
+            Speedboster(_speed += 1);
+        }
+       
+    }
+
+    float Speedboster(float speed)
+    {
+        speed = _speed;
+        return speed;
+    }
 
     #region ObstacleCheck
-
-    //todo:brokenCube ve helicopter classını tek bir yerden calıştır gereksiz update kullanma burdan calıştır
 
     private void CheckDistance()
     {
@@ -118,8 +138,8 @@ public class PlayerController : MonoBehaviour
             }
 
         }
-
-        #endregion
-
     }
+
+    #endregion
+
 }
